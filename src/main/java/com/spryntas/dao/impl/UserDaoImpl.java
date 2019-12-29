@@ -23,12 +23,12 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public List<User> getUserList() {
 
-		return jdbcTemplate.query("select * from User", new BeanPropertyRowMapper<User>(User.class));
+		return jdbcTemplate.query("select * from user", new BeanPropertyRowMapper<User>(User.class));
 	}
 	
 	@Override
 	public User getUserByEmail(String email) {
-		String sql = "select * from User where email=?;";
+		String sql = "select * from user where email=?;";
 		User user = jdbcTemplate.queryForObject(sql, new Object[] {email},
 				new BeanPropertyRowMapper<User>(User.class));
 		return user;
@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public User saveUser(User user) {
-		String sql = "insert into User(username,password,email,user_role)"
+		String sql = "insert into user(username,password,email,user_role)"
 				+ " values(?,?,?,?);";
 		jdbcTemplate.update(sql, new Object[] {user.getUsername(),user.getPassword(),
 				user.getEmail(),user.getUserRole().getId()});
