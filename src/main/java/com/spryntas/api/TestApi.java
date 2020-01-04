@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value="testAPi")
 public class TestApi {
 	
-	private static final Logger LOGGER = LogManager.getLogger(UserApi.class);
+	private static final Logger LOGGER = LogManager.getLogger(TestApi.class);
 	
 	@ApiOperation(value = "Testing API")
 	@GetMapping("/")

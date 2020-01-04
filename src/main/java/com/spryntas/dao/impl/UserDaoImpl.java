@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.spryntas.dao.UserDao;
 import com.spryntas.domain.User;
 
-@Repository
+@Repository(value="userDao")
 public class UserDaoImpl implements UserDao{
 	
 	private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);

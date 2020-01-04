@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/token")
 public class AuthenticationApi {
 
-	private static final Logger LOGGER = LogManager.getLogger(UserApi.class);
+	private static final Logger LOGGER = LogManager.getLogger(AuthenticationApi.class);
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
