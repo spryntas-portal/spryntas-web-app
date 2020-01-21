@@ -11,6 +11,7 @@ import com.spryntas.dao.ClientDao;
 import com.spryntas.domain.Client;
 import com.spryntas.exception.BadRequestException;
 import com.spryntas.service.ClientService;
+import com.spryntas.service.EmailService;
 
 @Service(value = "clientService")
 public class ClientServiceImpl implements ClientService {
@@ -19,6 +20,9 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	ClientDao clientDao;
+	
+	@Autowired
+	EmailService emailService;
 
 	@Override
 	public Client getClientInfo(Integer clientId, String email) {
@@ -46,6 +50,8 @@ public class ClientServiceImpl implements ClientService {
 	public Client createClient(Client client) {
 
 		LOGGER.info("starting createClient method from clientService");
+		
+		Client newClient = null;
 
 		if (client.getName() == null)
 			throw new BadRequestException("ClientName is empty");
@@ -55,8 +61,10 @@ public class ClientServiceImpl implements ClientService {
 			throw new BadRequestException("Client Url is empty");
 		if (client.getLocality() == null)
 			throw new BadRequestException("Client Locality is empty");
-
-		return clientDao.insertClient(client);
+		
+		newClient = clientDao.insertClient(client);
+		emailService.sendSimpleMessage(newClient.getEmail(), "Welcome "+newClient.getName(), "Thanks for Choosing Spryntas Service");
+		return newClient;
 
 	}
 
