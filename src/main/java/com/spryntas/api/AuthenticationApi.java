@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,13 +39,13 @@ public class AuthenticationApi {
 
 	@ApiOperation(value = "Generate token for user authentication")
 	@PostMapping()
-	public AuthToken register(@RequestBody LoginUser loginUser) throws AuthenticationException {
+	public AuthToken createToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
 
 		LOGGER.info("Started generating authToken for given user in auth endpoint");
-		authenticationManager.authenticate(
+		Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
 		final User user = userService.getUserByEmail(loginUser.getEmail());
-		final String token = jwtTokenHelper.generateToken(user);
+		final String token = jwtTokenHelper.generateToken(auth);
 		return new AuthToken(token, user.getEmail());
 	}
 }

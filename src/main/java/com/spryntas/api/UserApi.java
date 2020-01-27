@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ public class UserApi {
 	@Autowired
 	UserService userService;
 	 
+	@PreAuthorize("hasRole('ADMIN')")
 	@ApiOperation(value = "Retrieve all user details")
 	@GetMapping("all")
 	public List<User> getAllUsers() {
@@ -35,6 +37,7 @@ public class UserApi {
 		return userService.getAllUser();
 	}
 	
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@ApiOperation(value = "Retrieve user detail by given emailId")
 	@GetMapping()
 	public User getUserByEmail(@RequestParam("email") String email) {
@@ -42,6 +45,7 @@ public class UserApi {
 		return userService.getUserByEmail(email);
 	}
 	
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@ApiOperation(value = "Register user detail with signup user details")
 	@PostMapping("/signup")
 	public User saveUser(@RequestBody User user) {
