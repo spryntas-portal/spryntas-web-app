@@ -23,10 +23,10 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @Api(value="AuthenticationApi", description="To authenticate the token info")
-@RequestMapping("/token")
-public class AuthenticationApi {
+@RequestMapping("/session")
+public class SessionApi {
 
-	private static final Logger LOGGER = LogManager.getLogger(AuthenticationApi.class);
+	private static final Logger LOGGER = LogManager.getLogger(SessionApi.class);
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;

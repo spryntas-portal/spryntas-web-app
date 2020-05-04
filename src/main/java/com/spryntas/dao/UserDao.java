@@ -10,6 +10,6 @@ public interface UserDao {
 
 	User getUserByEmail(String email);
 
-	User saveUser(User user);
+	User saveUser(User user) throws Exception;
 
 }

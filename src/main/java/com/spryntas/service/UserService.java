@@ -10,6 +10,6 @@ public interface UserService {
 
 	User getUserByEmail(String email);
 
-	User saveUser(User user);
+	User saveUser(User user) throws Exception;
 
 }

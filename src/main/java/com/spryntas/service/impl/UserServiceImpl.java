@@ -13,10 +13,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.spryntas.dao.UserDao;
 import com.spryntas.domain.User;
+import com.spryntas.exception.BadRequestException;
 import com.spryntas.service.UserService;
+import com.spryntas.util.enums.UserRolesEnum;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
@@ -41,10 +44,22 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	}
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user) throws Exception {
 		LOGGER.info("starting saveUser method from userService");
-		if (user != null && user.getPassword() != null)
+		if (user == null)
+			throw new BadRequestException("UserDetail is Empty");
+		if (StringUtils.isEmpty(user.getUsername()))
+			throw new BadRequestException("Username cannot be Empty");
+		if (StringUtils.isEmpty(user.getPassword()))
+			throw new BadRequestException("Password cannot be Empty");
+		if (user.getPassword() != null)
 			user.setPassword(bcryptEncoder.encode(user.getPassword()));
+		if (StringUtils.isEmpty(user.getEmail()))
+			throw new BadRequestException("Email cannot be Empty");
+		if (user.getUserRole() == null)
+			throw new BadRequestException("User Role cannot be Empty");
+		if (user.getUserRole().equals(UserRolesEnum.UNKNOWN))
+			throw new BadRequestException("Invalid User Role");
 		return userDao.saveUser(user);
 	}
 

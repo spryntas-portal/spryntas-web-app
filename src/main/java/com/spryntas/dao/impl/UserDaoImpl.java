@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user) throws Exception{
 		LOGGER.info("Registering user by given signup info");
 		String sql = "insert into user(username,password,email,user_role)"
 				+ " values(?,?,?,?);";
