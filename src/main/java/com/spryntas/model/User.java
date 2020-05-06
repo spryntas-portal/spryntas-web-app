@@ -1,4 +1,4 @@
-package com.spryntas.domain;
+package com.spryntas.model;
 
 import java.sql.Timestamp;
 

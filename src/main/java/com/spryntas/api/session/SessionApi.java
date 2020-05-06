@@ -1,7 +1,5 @@
-package com.spryntas.api;
+package com.spryntas.api.session;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spryntas.api.user.UserService;
 import com.spryntas.config.JwtTokenHelper;
-import com.spryntas.domain.AuthToken;
-import com.spryntas.domain.LoginUser;
-import com.spryntas.domain.User;
-import com.spryntas.service.UserService;
+import com.spryntas.model.AuthToken;
+import com.spryntas.model.LoginUser;
+import com.spryntas.model.User;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Api(value="AuthenticationApi", description="To authenticate the token info")
 @RequestMapping("/session")
+@Slf4j
 public class SessionApi {
 
-	private static final Logger LOGGER = LogManager.getLogger(SessionApi.class);
-	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -41,7 +39,7 @@ public class SessionApi {
 	@PostMapping()
 	public AuthToken createToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
 
-		LOGGER.info("Started generating authToken for given user in auth endpoint");
+		log.info("Started generating authToken for given user in auth endpoint");
 		Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
 		final User user = userService.getUserByEmail(loginUser.getEmail());

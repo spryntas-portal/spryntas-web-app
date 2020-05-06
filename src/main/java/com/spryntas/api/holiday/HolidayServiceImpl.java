@@ -1,14 +1,12 @@
-package com.spryntas.service.impl;
+package com.spryntas.api.holiday;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spryntas.dao.HolidayDao;
-import com.spryntas.domain.Holiday;
 import com.spryntas.exception.BadRequestException;
-import com.spryntas.service.HolidayService;
+import com.spryntas.model.Holiday;
 
 @Service
 public class HolidayServiceImpl implements HolidayService {

@@ -1,11 +1,9 @@
-package com.spryntas.service.impl;
+package com.spryntas.api.user;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,17 +13,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.spryntas.dao.UserDao;
-import com.spryntas.domain.User;
 import com.spryntas.exception.BadRequestException;
-import com.spryntas.service.UserService;
+import com.spryntas.model.User;
 import com.spryntas.util.enums.UserRolesEnum;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service(value = "userService")
+@Slf4j
 public class UserServiceImpl implements UserDetailsService, UserService {
 	
-	private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
-
 	@Autowired
 	UserDao userDao;
 
@@ -33,19 +30,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	private BCryptPasswordEncoder bcryptEncoder;
 
 	public List<User> getAllUser() {
-		LOGGER.info("starting getAllUser method from userService");
+		log.info("starting getAllUser method from userService");
 		return userDao.getUserList();
 	}
 
 	@Override
 	public User getUserByEmail(String email) {
-		LOGGER.info("starting getUserByEmail method from userService");
+		log.info("starting getUserByEmail method from userService");
 		return userDao.getUserByEmail(email);
 	}
 
 	@Override
 	public User saveUser(User user) throws Exception {
-		LOGGER.info("starting saveUser method from userService");
+		log.info("starting saveUser method from userService");
 		if (user == null)
 			throw new BadRequestException("UserDetail is Empty");
 		if (StringUtils.isEmpty(user.getUsername()))
@@ -65,7 +62,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		LOGGER.info("starting loadUserByUsername method from userService");
+		log.info("starting loadUserByUsername method from userService");
 		User user = userDao.getUserByEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");

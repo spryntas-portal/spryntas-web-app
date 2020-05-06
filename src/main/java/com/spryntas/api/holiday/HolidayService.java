@@ -1,8 +1,8 @@
-package com.spryntas.service;
+package com.spryntas.api.holiday;
 
 import java.util.List;
 
-import com.spryntas.domain.Holiday;
+import com.spryntas.model.Holiday;
 
 public interface HolidayService {
 

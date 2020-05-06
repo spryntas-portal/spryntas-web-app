@@ -1,8 +1,8 @@
-package com.spryntas.dao;
+package com.spryntas.api.user;
 
 import java.util.List;
 
-import com.spryntas.domain.User;
+import com.spryntas.model.User;
 
 public interface UserDao {
 	

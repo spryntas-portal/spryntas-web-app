@@ -1,4 +1,4 @@
-package com.spryntas.service;
+package com.spryntas.util.helper;
 
 import java.io.File;
 

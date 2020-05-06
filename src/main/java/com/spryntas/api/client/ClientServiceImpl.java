@@ -1,22 +1,19 @@
-package com.spryntas.service.impl;
+package com.spryntas.api.client;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spryntas.dao.ClientDao;
-import com.spryntas.domain.Client;
 import com.spryntas.exception.BadRequestException;
-import com.spryntas.service.ClientService;
-import com.spryntas.service.EmailService;
+import com.spryntas.model.Client;
+import com.spryntas.util.helper.EmailService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service(value = "clientService")
+@Slf4j
 public class ClientServiceImpl implements ClientService {
-
-	private static final Logger LOGGER = LogManager.getLogger(ClientServiceImpl.class);
 
 	@Autowired
 	ClientDao clientDao;
@@ -26,7 +23,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Client getClientInfo(Integer clientId, String email) {
-		LOGGER.info("starting getClientInfo method from clientService");
+		log.info("starting getClientInfo method from clientService");
 		Client client = null;
 
 		if (clientId != null && email != null)
@@ -42,14 +39,14 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public List<Client> getAllClients() {
-		LOGGER.info("starting getAllClients Info method from clientService");
+		log.info("starting getAllClients Info method from clientService");
 		return clientDao.getAllClients();
 	}
 
 	@Override
 	public Client createClient(Client client) {
 
-		LOGGER.info("starting createClient method from clientService");
+		log.info("starting createClient method from clientService");
 		
 		Client newClient = null;
 

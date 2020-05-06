@@ -1,10 +1,10 @@
 
-package com.spryntas.dao;
+package com.spryntas.api.holiday;
 
 import java.sql.Date;
 import java.util.List;
 
-import com.spryntas.domain.Holiday;
+import com.spryntas.model.Holiday;
 
 public interface HolidayDao {
 	List<Holiday> retrieveByEvent(String event_name);

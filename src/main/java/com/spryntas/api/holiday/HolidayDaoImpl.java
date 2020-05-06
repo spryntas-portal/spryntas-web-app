@@ -1,25 +1,22 @@
-package com.spryntas.dao.impl;
+package com.spryntas.api.holiday;
 
 import java.sql.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.spryntas.dao.HolidayDao;
-import com.spryntas.domain.Holiday;
+import com.spryntas.model.Holiday;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Repository(value="HolidayDao")
+@Slf4j
 public class HolidayDaoImpl implements HolidayDao {
-
-	private static final Logger LOGGER = LogManager.getLogger(HolidayDaoImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -47,13 +44,13 @@ public class HolidayDaoImpl implements HolidayDao {
 //				new BeanPropertyRowMapper<Holiday>(Holiday.class));
 				
 			} catch (Exception e) {
-				LOGGER.error("error occured from Retriving date details");
+				log.error("error occured from Retriving date details");
 			}
 		} else
 			try {
 				holiday = jdbcTemplate.query(Holiday_sql.toString(), new BeanPropertyRowMapper<Holiday>(Holiday.class));
 			} catch (DataAccessException e) {
-				LOGGER.error("error occured from Retriving date details");
+				log.error("error occured from Retriving date details");
 			}
 
 		return holiday;
@@ -77,7 +74,7 @@ public class HolidayDaoImpl implements HolidayDao {
 				holiday = jdbcTemplate.queryForObject(Holiday_sql.toString(), new Object[] { eventName},
 						new BeanPropertyRowMapper<Holiday>(Holiday.class));
 			} catch (Exception e) {
-				LOGGER.error("error occured from Retriving date details");
+				log.error("error occured from Retriving date details");
 			}}
 			return holiday;
 			}
@@ -97,7 +94,7 @@ public class HolidayDaoImpl implements HolidayDao {
 				holiday = jdbcTemplate.queryForObject(Holiday_sql.toString(), new Object[] { holidayDate },
 						new BeanPropertyRowMapper<Holiday>(Holiday.class));
 			} catch (DataAccessException e) {
-				LOGGER.error("error occured in Retriving single data date details");
+				log.error("error occured in Retriving single data date details");
 			}
 		}
 
@@ -112,7 +109,7 @@ public class HolidayDaoImpl implements HolidayDao {
 			jdbcTemplate.update(insert_sql,
 					new Object[] { holidays.getHolidayDate(), holidays.getEventName(), holidays.getLocality() });
 		} catch (Exception ex) {
-			LOGGER.error("error occured in adding date details");
+			log.error("error occured in adding date details");
 
 		}
 		return retrieveASingleData(holidays.getHolidayDate()) != null ? retrieveASingleData(holidays.getHolidayDate())
@@ -126,7 +123,7 @@ public class HolidayDaoImpl implements HolidayDao {
 			jdbcTemplate.update(update_sql, new Object[] { holidays.getEventName(), holidays.getHolidayDate(),
 					holidays.getLocality(), holidayId });
 		} catch (DataAccessException e) {
-			LOGGER.error("error occured in updating date details");
+			log.error("error occured in updating date details");
 
 		}
 	}
@@ -137,7 +134,7 @@ public class HolidayDaoImpl implements HolidayDao {
 		try {
 			jdbcTemplate.update(delete_sql, new Object[] { holidayId });
 		} catch (DataAccessException e) {
-			LOGGER.error("error occured in delete date details");
+			log.error("error occured in delete date details");
 
 		}
 	}

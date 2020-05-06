@@ -1,8 +1,8 @@
-package com.spryntas.service;
+package com.spryntas.api.client;
 
 import java.util.List;
 
-import com.spryntas.domain.Client;
+import com.spryntas.model.Client;
 
 public interface ClientService {
 
