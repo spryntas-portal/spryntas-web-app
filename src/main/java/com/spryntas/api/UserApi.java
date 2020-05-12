@@ -1,4 +1,4 @@
-package com.spryntas.api.user;
+package com.spryntas.api;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spryntas.exception.BadRequestException;
 import com.spryntas.exception.UnAuthorizedException;
 import com.spryntas.model.User;
+import com.spryntas.service.user.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

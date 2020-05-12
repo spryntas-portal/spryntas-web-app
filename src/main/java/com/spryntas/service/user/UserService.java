@@ -1,4 +1,4 @@
-package com.spryntas.api.user;
+package com.spryntas.service.user;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.spryntas.api.holiday;
+package com.spryntas.api;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spryntas.model.Holiday;
+import com.spryntas.service.holiday.HolidayService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

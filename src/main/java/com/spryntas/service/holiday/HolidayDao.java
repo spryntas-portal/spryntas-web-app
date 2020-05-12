@@ -1,5 +1,5 @@
 
-package com.spryntas.api.holiday;
+package com.spryntas.service.holiday;
 
 import java.sql.Date;
 import java.util.List;

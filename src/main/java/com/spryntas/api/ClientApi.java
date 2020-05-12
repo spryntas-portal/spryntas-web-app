@@ -1,4 +1,4 @@
-package com.spryntas.api.client;
+package com.spryntas.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spryntas.model.Client;
+import com.spryntas.service.client.ClientService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

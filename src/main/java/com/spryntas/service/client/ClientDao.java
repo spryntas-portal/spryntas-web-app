@@ -1,4 +1,4 @@
-package com.spryntas.api.client;
+package com.spryntas.service.client;
 
 import java.util.List;
 

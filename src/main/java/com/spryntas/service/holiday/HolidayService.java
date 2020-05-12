@@ -1,4 +1,4 @@
-package com.spryntas.api.holiday;
+package com.spryntas.service.holiday;
 
 import java.util.List;
 
