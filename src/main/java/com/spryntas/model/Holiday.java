@@ -5,7 +5,12 @@ import java.sql.Timestamp;
 
 public class Holiday {
 	private Integer holidayId;
-
+	private Date holidayDate;
+	private String eventName;
+	private String locality;
+	private Timestamp created;
+	private Timestamp updated;
+	private Timestamp deleted;
 	public Integer getHolidayId() {
 		return holidayId;
 	}
@@ -13,15 +18,6 @@ public class Holiday {
 	public void setHolidayId(Integer holidayId) {
 		this.holidayId = holidayId;
 	}
-
-	private Date holidayDate;
-	private String eventName;
-
-	private String locality;
-	private Timestamp created;
-	private Timestamp updated;
-	private Timestamp deleted;
-
 	public Date getHolidayDate() {
 		return holidayDate;
 	}
